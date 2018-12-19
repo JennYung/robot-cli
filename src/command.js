@@ -1,11 +1,13 @@
-import { place, move, left, right, report } from './action';
 import program from 'commander';
+import {
+  place, move, left, right, report
+} from './action';
 
 program
-  .version('0.1.0')
+  .version('0.1.0');
 
 // error on unknown commands
-program.on('command:*', function () {
+program.on('command:*', () => {
   console.error('Invalid command \nSee --help for a list of available commands.');
   process.exit(1);
 });
