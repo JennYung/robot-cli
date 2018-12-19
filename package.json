@@ -1,0 +1,97 @@
+{
+  "name": "robot",
+  "version": "0.1.0",
+  "description": "Robot CLI",
+  "main": "src/index.js",
+  "private": false,
+  "license": "MIT",
+  "engines": {
+    "node": ">=8",
+    "yarn": "*"
+  },
+  "preferGlobal": true,
+  "bin": "./src/index.js",
+  "scripts": {
+    "link": "yarn link robot",
+    "unlink": "yarn unlink robot",
+    "start": "NODE_ENV=production node ./src/index.js",
+    "dev": "NODE_ENV=development node ./src/index.js",
+    "lint": "eslint '**/*.js' --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:fix": "yarn lint -- --fix",
+    "test": "NODE_ENV=test jest --forceExit --detectOpenHandles --coverage --coverageDirectory=coverage",
+    "test:unit": "NODE_ENV=test jest --forceExit --detectOpenHandles --testPathPattern=\"(/src/.*)\\.(spec).js$\"",
+    "validate": "yarn lint && yarn test"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "commander": "^2.19.0",
+    "config": "^3.0.1",
+    "deepcopy": "^1.0.0",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.10",
+    "assert": "^1.4.1",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.10.0",
+    "jest": "^23.6.0",
+    "jest-tobetype": "^1.2.0"
+  },
+  "_moduleAliases": {
+    "@app": "src",
+    "@config": "config",
+    "@middlewares": "src/middlewares",
+    "@services": "src/services",
+    "@tests": "src/tests",
+    "@utils": "src/utils"
+  },
+  "nyc": {
+    "include": "src",
+    "exclude": [
+      "**/*.spec.js",
+      "**/*.test.js",
+      "**/index.js"
+    ]
+  },
+  "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "@app(.*)$": "<rootDir>/src$1",
+      "@config(.*)$": "<rootDir>/config$1",
+      "@middlewares(.*)$": "<rootDir>/src/middlewares$1",
+      "@services(.*)$": "<rootDir>/src/services$1",
+      "@tests(.*)$": "<rootDir>/src/tests$1",
+      "@utils(.*)$": "<rootDir>/src/utils$1"
+    },
+    "testRegex": "(/src/.*)\\.(test|spec).js$",
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "modulePathIgnorePatterns": [
+      "src/tests"
+    ],
+    "testPathIgnorePatterns": [
+      "\\index.js$",
+      "(/src/.*)\\.(action|command|config|index).js$"
+    ],
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!config/**",
+      "!src/**/index.js",
+      "!src/**/command.js",
+      "!src/**/action.js",
+      "!<rootDir>/node_modules/"
+    ],
+    "coverageReporters": [
+      "json",
+      "html",
+      "lcov",
+      "text",
+      "clover"
+    ]
+  }
+}
