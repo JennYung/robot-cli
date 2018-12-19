@@ -9,7 +9,7 @@ const robot = new Robot();
 const key = 'location';
 
 function handleError(error) {
-  console.log(error);
+  console.log(error.message);
   cache.quit();
 }
 
