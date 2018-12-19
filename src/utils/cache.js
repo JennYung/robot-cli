@@ -18,10 +18,10 @@ export default class Cache {
     });
   }
 
-  setex(key, expiry, cache) {
+  set(key, cache) {
     return new Promise((resolve) => {
       if (key) {
-        this._redis.setex(key, expiry, JSON.stringify(cache), (error, response) => {
+        this._redis.set(key, JSON.stringify(cache), (error, response) => {
           if (error) {
             resolve(true);
           }

@@ -28,7 +28,7 @@ yarn link
 ```
 
 ## Example Input and Output
-------------------------
+
 ```bash
  Example a
 
@@ -90,3 +90,4 @@ yarn test
 yarn test:unit
 ```
 
+Please change the table's dimension in the config file for a wider area.

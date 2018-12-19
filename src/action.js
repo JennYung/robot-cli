@@ -14,7 +14,7 @@ function handleError(error) {
 }
 
 function storeLocation(location) {
-  cache.setex(key, config.redis.expiredTime, location);
+  cache.set(key, location);
   cache.quit();
 }
 

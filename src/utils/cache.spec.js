@@ -70,17 +70,16 @@ describe('Cache', () => {
     });
   });
 
-  describe('Setex', () => {
-    const expiredTime = 60;
+  describe('Set', () => {
     describe('return OK', () => {
       it('if store cache successfully', (done) => {
         const redis = {
-          setex: (key, time, data, callback) => {
+          set: (key, data, callback) => {
             return callback(null, 'OK');
           }
         };
         const cache = new Cache(redis);
-        cache.setex('location', expiredTime, location)
+        cache.set('location', location)
           .then((response) => {
             expect(response).toEqual('OK');
             done();
@@ -96,12 +95,12 @@ describe('Cache', () => {
     describe('return true', () => {
       it('if error when store cache data', (done) => {
         const redis = {
-          setex: (key, time, data, callback) => {
+          set: (key, data, callback) => {
             return callback(new Error('test'), null);
           }
         };
         const cache = new Cache(redis);
-        cache.setex('location', expiredTime, location)
+        cache.set('location', location)
           .then((response) => {
             expect(response).toEqual(true);
             done();
@@ -115,12 +114,12 @@ describe('Cache', () => {
 
       it('if no key', (done) => {
         const redis = {
-          setex: (key, time, data, callback) => {
+          set: (key, data, callback) => {
             return callback(null, 'OK');
           }
         };
         const cache = new Cache(redis);
-        cache.setex(null, expiredTime, location)
+        cache.set(null, location)
           .then((response) => {
             expect(response).toEqual(true);
             done();
